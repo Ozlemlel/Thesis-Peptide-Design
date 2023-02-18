@@ -1,6 +1,5 @@
-< + > 
-< ; > 
-
+< + > = NEW ITEM PREFIX
+< ; > = ITEM CONTINUATION PREFIX
 
 
 < + > git status
@@ -41,10 +40,6 @@ for alignment in aligner.align("TACCG", "ACG"):
 < ; > There is another module provided by Biopython to do the pairwise sequence alignment.
 < ; > Align module has a PairwiseAligner() for this purpose.
 < ; > It has various APIs to set the parameters like mode, match score, algorithm, gap penalty, etc.
-
-< + > = NEW ITEM PREFIX
-< ; > = ITEM CONTINUATION PREFIX
-
 
 
 < + > protein datası alarak kodu yaz herhangi bir data
