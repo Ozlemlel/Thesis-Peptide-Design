@@ -39,6 +39,7 @@ import itertools
 #(
 # 3rd party modules:
 import Bio
+from Bio import Align
 #)
 
 #(
@@ -67,7 +68,7 @@ def get_grouped_data(data_file_path, group_key_func = None):
 #)
 
 
-def select_rows_by_min_seqlen(data_rows, desired_min_len, desired_max_len):
+def select_rows_by_min_seqlen(data_rows, desired_min_len, desired_max_len = None):
 #(
     """ row = id, sequence, activation class string
     """
@@ -76,11 +77,51 @@ def select_rows_by_min_seqlen(data_rows, desired_min_len, desired_max_len):
     for rw in data_rows:
     #(
         seq = rw[1]
-        if len(seq) >= desired_min_len and len(seq) <= desired_max_len:
+        if len(seq) >= desired_min_len and (desired_max_len == None or len(seq) <= desired_max_len):
             selected_rows.append(rw)
         
     #)      
     return selected_rows
+#)
+
+
+def cutoff_seq_suffixes(data_rows, cutoff_len):
+#(
+    """ row = id, sequence, activation class string
+    """
+    
+    selected_rows = []
+    for rw in data_rows:
+    #(
+        seq = rw[1]
+        
+        if len(seq) >= cutoff_len:
+        #(
+            new_row = [rw[0], seq[:cutoff_len], rw[2]]
+            selected_rows.append(new_row)
+        #)
+    #)      
+    return selected_rows
+#)
+
+
+def pairwise_alignment_score_same_len(first_seq, second_seq):
+#(
+    if len(first_seq) == len(second_seq):
+    #(
+        aligner = Align.PairwiseAligner()
+        aligner.open_gap_score = -0.5
+        aligner.extend_gap_score = -0.1
+        aligner.target_end_gap_score = 0.0
+        aligner.query_end_gap_score = 0.0
+        
+        # return aligner.align(first_seq, second_seq)
+        return aligner.score(first_seq, second_seq)
+    #)
+    else:
+    #(
+        raise Exception("Length of the sequences must be the same.")
+    #)
 #)
 
 
@@ -101,9 +142,29 @@ def pairwise_align_two_datasets(csv_file):
         if x[0] == "mod. active":
             B_set = list(x[1])
     #)
-    for x in A_set:
+    
+    min_seqlen = 12
+    
+    A_set_12_len = select_rows_by_min_seqlen(A_set, min_seqlen)
+    B_set_12_len = select_rows_by_min_seqlen(B_set, min_seqlen) 
+    
+    score = pairwise_alignment_score_same_len("abc", "abc")
+    print(score)
+    
+    for x in A_set_12_len:
         print(x)
+    
+    print("~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~")
+    print("A_set_cut_12:")
+    
+    A_set_cut_12 = cutoff_seq_suffixes(A_set_12_len, min_seqlen)
+    
+    for x in A_set_cut_12:
+        print(x)
+    #
+    
 #)
+
 
 
 def main(args):
