@@ -1,3 +1,14 @@
+*.csv
+*.txt
+
+# Excluded files and folders:
+
+!NOTES.txt
+!ACPs_Breast_cancer.csv
+!ACPs_Lung_cancer.csv
+
+###
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

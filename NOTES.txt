@@ -1,0 +1,26 @@
+< + > 
+< ; > 
+
+
+< + > Performs pairwise sequence alignment using dynamic programming. (class Bio.Align.PairwiseAligner)
+< ; > https://biopython.org/docs/1.75/api/Bio.Align.html?highlight=pairwisealign#Bio.Align.PairwiseAligner
+aligner.open_gap_score = -0.5
+
+aligner.extend_gap_score = -0.1
+
+aligner.target_end_gap_score = 0.0
+
+aligner.query_end_gap_score = 0.0
+
+for alignment in aligner.align("TACCG", "ACG"):
+
+    print("Score = %.1f:" % alignment.score)
+
+    print(alignment)
+
+
+< + > Biopython – Pairwise Alignment (Last Updated : 28 Jul, 2022)
+< ; > https://www.geeksforgeeks.org/biopython-pairwise-alignment/
+< ; > There is another module provided by Biopython to do the pairwise sequence alignment.
+< ; > Align module has a PairwiseAligner() for this purpose.
+< ; > It has various APIs to set the parameters like mode, match score, algorithm, gap penalty, etc.
