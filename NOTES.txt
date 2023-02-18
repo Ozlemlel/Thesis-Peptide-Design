@@ -2,11 +2,21 @@
 < ; > 
 
 
-< + > git kullanımı (ilgili repo'da command line'dayken):
-< ; > git status
-< ; > git add .
-< ; > git commit -m "ilgili commit mesajı"
-< ; > git push
+
+< + > git status
+< ; > repo'daki değişiklik olan dosyaları gösterir.
+
+< + > git diff
+< ; > repo'daki değişen dosyalardaki satırların değişimini gösterir.
+
+< + > git add .
+< ; > repo'daki tüm değişiklikleri ekler.
+
+< + > git commit -m "değişiklikler ile ilgili bilgiler."
+< ; > değişiklikleri repo'ya ekler.
+
+< + > git push
+< ; > uzaktaki server'a local repo'daki commit'leri (değişiklikleri) gönderir.
 
 
 < + > Performs pairwise sequence alignment using dynamic programming. (class Bio.Align.PairwiseAligner)
@@ -31,3 +41,29 @@ for alignment in aligner.align("TACCG", "ACG"):
 < ; > There is another module provided by Biopython to do the pairwise sequence alignment.
 < ; > Align module has a PairwiseAligner() for this purpose.
 < ; > It has various APIs to set the parameters like mode, match score, algorithm, gap penalty, etc.
+
+< + > = NEW ITEM PREFIX
+< ; > = ITEM CONTINUATION PREFIX
+
+
+
+< + > protein datası alarak kodu yaz herhangi bir data
+
+< + > Pairwise sequence alignment using a dynamic programming algorithm. This provides functions to get global and local alignments between two sequences. A global alignment finds the best concordance between all characters in two sequences.
+< ; > https://biopython.org/docs/1.75/api/Bio.pairwise2.html
+
+
+< + > TODO: Change .append in match.py to pandas.concat (change those lines completely)
+
+
+< + > Genetically Engineered Materials Science and Engineering Center
+< ; > https://github.com/Sarikaya-Lab-GEMSEC
+< ; > 2023-02-09
+
+
+< + > Biomimetic Tooth Repair: Amelogenin-Derived Peptide Enables in Vitro Remineralization of Human Enamel
+< ; > https://pubs.acs.org/doi/abs/10.1021/acsbiomaterials.7b00959
+
+
+< + > Cementomimetics—constructing a cementum-like biomineralized microlayer via amelogenin-derived peptides
+< ; > https://www.nature.com/articles/ijos201240
