@@ -2,6 +2,13 @@
 < ; > 
 
 
+< + > git kullanımı (ilgili repo'da command line'dayken):
+< ; > git status
+< ; > git add .
+< ; > git commit -m "ilgili commit mesajı"
+< ; > git push
+
+
 < + > Performs pairwise sequence alignment using dynamic programming. (class Bio.Align.PairwiseAligner)
 < ; > https://biopython.org/docs/1.75/api/Bio.Align.html?highlight=pairwisealign#Bio.Align.PairwiseAligner
 aligner.open_gap_score = -0.5
