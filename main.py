@@ -67,8 +67,27 @@ def get_grouped_data(data_file_path, group_key_func = None):
 #)
 
 
+def select_rows_by_min_seqlen(data_rows, desired_min_len, desired_max_len):
+#(
+    """ row = id, sequence, activation class string
+    """
+    
+    selected_rows = []
+    for rw in data_rows:
+    #(
+        seq = rw[1]
+        if len(seq) >= desired_min_len and len(seq) <= desired_max_len:
+            selected_rows.append(rw)
+        
+    #)      
+    return selected_rows
+#)
+
+
 def main(args):
 #(
+    #mod. active ile inactive exp gruplarından 80'er tane row alınıp, her row karşısındaki row ile karşılaştırılacak
+    
 	first_file = args["first_sequence_file"]
 	second_file = args["second_sequence_file"]
 	
@@ -85,15 +104,6 @@ def main(args):
 		#)
 		print("~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~")
 	#)
-	"""
-	for idx, elm in enumerate(first_data_with_header):
-	#(
-		print(f"{idx}, {elm}")
-		
-		
-	#)
-	"""
-	
 	
 	
 	print("Executed main.")
@@ -114,7 +124,17 @@ if __name__ == "__main__":
 	main(args)
 #)
 
-def test_jupyter():
-#(
-    pass
-#)
+
+
+"""
+select_by_seqlen("data.csv", 12)
+select_by_seqlen("data.csv", 15)
+select_by_seqlen("data.csv", 20)
+select_by_seqlen("data.csv", 3)
+"""
+
+"""
+#peptitleri uzunluğuna göre alınacak, aşağıdaki de dosya okumak için
+    data_with_header = Csvio.read_data_from_csv(csv_file_path)
+	rows = data_with_header[1:]
+"""
