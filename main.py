@@ -63,7 +63,7 @@ def get_grouped_data(data_file_path, group_key_func = None):
 	# Sorting is necessary for itertools.groupby
 	sorted_data = sorted(data_iter, key = lambda x: x[2]) # x[2] = activation class
 	
-	return itertools.groupby(sorted_data, key = lambda x: x[2])
+	return itertools.groupby(sorted_data, key = group_key_func)
 #)
 
 
@@ -84,29 +84,54 @@ def select_rows_by_min_seqlen(data_rows, desired_min_len, desired_max_len):
 #)
 
 
+def pairwise_align_two_datasets(csv_file):
+#(
+    #mod. active ile inactive exp gruplarından 80'er tane row alınıp, her row karşısındaki row ile karşılaştırılacak
+    get_class_value = lambda x: x[2]
+    grouped_class = get_grouped_data(csv_file, group_key_func = get_class_value)
+
+    A_set = []
+    B_set = []
+
+    for x in grouped_class:
+    #(
+        if x[0] == "inactive - exp":
+            A_set = list(x[1])
+            
+        if x[0] == "mod. active":
+            B_set = list(x[1])
+    #)
+    for x in A_set:
+        print(x)
+#)
+
+
 def main(args):
 #(
     #mod. active ile inactive exp gruplarından 80'er tane row alınıp, her row karşısındaki row ile karşılaştırılacak
-    
-	first_file = args["first_sequence_file"]
-	second_file = args["second_sequence_file"]
-	
-	get_class_value = lambda x: x[2]
-	grouped_class = get_grouped_data(first_file, group_key_func = get_class_value)
-	
-	for key, group in grouped_class:
-	#(
-		print("~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~")
-		print(key)
-		for x in group:
-		#(
-			print(x)
-		#)
-		print("~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~")
-	#)
-	
-	
-	print("Executed main.")
+
+    pairwise_align_two_datasets("ACPs_Breast_cancer.csv")
+    """
+    first_file = args["first_sequence_file"]
+    second_file = args["second_sequence_file"]
+
+    get_class_value = lambda x: x[2]
+    grouped_class = get_grouped_data(first_file, group_key_func = get_class_value)
+
+    for key, group in grouped_class:
+    #(
+        print("~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~")
+        print(key)
+        for x in group:
+        #(
+            print(x)
+        #)
+        print("~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~")
+    #)
+    """
+
+
+    print("Executed main.")
 #)
 
 
