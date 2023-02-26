@@ -149,7 +149,7 @@ def pairwise_align_two_datasets(csv_file):
     A_set_12_len = select_rows_by_min_seqlen(A_set, min_seqlen)
     B_set_12_len = select_rows_by_min_seqlen(B_set, min_seqlen) 
     
-    score = pairwise_alignment_score_same_len("abc", "abc")
+    score = PSS_same_len("abc", "abc")
     print(f"Alignment score: {score}")
     
     for x in A_set_12_len:
@@ -163,6 +163,18 @@ def pairwise_align_two_datasets(csv_file):
     for x in A_set_cut_12:
         print(x)
     #
+    for y in B_set_12_len:
+        print(y)
+    
+    print("~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~")
+    print("B_set_cut_12:")
+    
+    B_set_cut_12 = cutoff_seq_suffixes(B_set_12_len, min_seqlen)
+    
+    for x in A_set_cut_12:
+        print(x)
+    for y in B_set_cut_12:
+        print(y)
     
 #)
 def delta_func(i, j):
