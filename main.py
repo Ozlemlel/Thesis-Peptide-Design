@@ -175,6 +175,7 @@ def pairwise_align_two_datasets(csv_file):
         print(x)
     for y in B_set_cut_12:
         print(y)
+
     
 #)
 def delta_func(i, j):
@@ -218,7 +219,10 @@ def total_similarity_scores(A_set, B_set):
     first_equation = 1 / A_set_len * (B_set_len - delta_AB)
     TSS = first_equation * double_sum
     return TSS
-        
+
+
+print("tss is:", total_similarity_scores(A_set, B_set)") 
+
         
         
     
