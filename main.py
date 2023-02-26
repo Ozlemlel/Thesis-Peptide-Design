@@ -105,8 +105,9 @@ def cutoff_seq_suffixes(data_rows, cutoff_len):
 #)
 
 
-def pairwise_alignment_score_same_len(first_seq, second_seq):
+def PSS_same_len(first_seq, second_seq):
 #(
+    #pairwise_alignment_score_same_len = PSS
     if len(first_seq) == len(second_seq):
     #(
         aligner = Align.PairwiseAligner()
@@ -133,7 +134,7 @@ def pairwise_align_two_datasets(csv_file):
 
     A_set = []
     B_set = []
-
+    
     for x in grouped_class:
     #(
         if x[0] == "inactive - exp":
@@ -149,7 +150,7 @@ def pairwise_align_two_datasets(csv_file):
     B_set_12_len = select_rows_by_min_seqlen(B_set, min_seqlen) 
     
     score = pairwise_alignment_score_same_len("abc", "abc")
-    print(score)
+    print(f"Alignment score: {score}")
     
     for x in A_set_12_len:
         print(x)
@@ -164,7 +165,53 @@ def pairwise_align_two_datasets(csv_file):
     #
     
 #)
+def delta_func(i, j):
+       
+    if i == j:
+        
+        return 1
+    else:
+        
+        return 0  
 
+        
+
+def total_similarity_scores(A_set, B_set):
+#(
+    A_set_len = len(A_set)
+    B_set_len = len(B_set)
+        
+            
+    #PSS_ij = PSS_same_len(A_set[i], B_set[j])
+    double_sum = 0
+    for i in range(A_set_len):
+    #(
+        for j in range(B_set_len):
+        #(
+            A_seq = A_set[i]
+            B_seq = B_set[j]
+           
+            PSS_ij = PSS_same_len(A_seq, B_seq)
+            delta_ij = delta_func(i, j)
+            delta_AB = delta_func(A_set, B_set)
+
+            inner_equation = 1 - delta_ij * delta_AB
+            product = PSS_ij * inner_equation
+            
+            double_sum += product  #hesaplananları burda tutuyor
+        #)   
+    #) 
+        
+    # product içteki sum kısmını hesaplıyor
+    first_equation = 1 / A_set_len * (B_set_len - delta_AB)
+    TSS = first_equation * double_sum
+    return TSS
+        
+        
+        
+    
+
+#)
 
 
 def main(args):
